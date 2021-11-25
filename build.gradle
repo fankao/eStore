@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.6.0'
+    id 'org.springframework.boot' version '2.3.5.RELEASE'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'org.hidetake.swagger.generator' version '2.18.2'
@@ -14,19 +14,17 @@ swaggerSources {
     def importMappings = 'URI=java.net.URI'
     eStore {
         def apiYaml = "${rootDir}/src/main/resources/api/openapi.yaml"
-        def configJson = "${rootDir}/ src / main / resources / api/config.json"
+        def configJson = "${rootDir}/src/main/resources/api/config.json"
         inputFile = file(apiYaml)
-        def ignoreFile = file("${rootDir}/ src / main / resources / api /.openapi-generator-ignore")
+        def ignoreFile = file("${rootDir}/src/main/resources/api/.openapi-generator-ignore")
         code {
             language = 'spring'
             configFile = file(configJson)
             rawOptions = ['--ignore-file-override', ignoreFile,
                           '--type-mappings',
-                          typeMappings, '--import-mappings', importMappings] as
-                    List<String>
-            components = [models: true, apis: true, supportingFiles:
-                    'ApiUtil.java']
-            / / depends On validation // Should be uncommented once
+                          typeMappings, '--import-mappings', importMappings] as List<String>
+            components = [models: true, apis: true, supportingFiles:'ApiUtil.java']
+            // depends On validation // Should be uncommented once
             //plugin starts supporting OA 3 validation
         }
     }
@@ -41,14 +39,14 @@ repositories {
 }
 
 dependencies {
-    //Open API setup
+    // OpenAPI Starts
     swaggerCodegen 'org.openapitools:openapi-generator-cli:4.3.1'
     compileOnly 'io.swagger:swagger-annotations:1.6.2'
-    compileOnly 'org.springframework.boot:spring-boot-startervalidation'
+    compileOnly 'org.springframework.boot:spring-boot-starter-validation'
     compileOnly 'org.openapitools:jackson-databind-nullable:0.2.1'
-    implementation 'com.fasterxml.jackson.dataformat:jacksondataformat-xml'
-    implementation 'org.springframework.boot:spring-boot-starterhateoas'
-    //-----------------------
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+    implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+    // OpenAPI Ends
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
