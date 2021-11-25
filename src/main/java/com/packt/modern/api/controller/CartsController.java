@@ -1,4 +1,4 @@
-package com.packt.modern.api.controllers;
+package com.packt.modern.api.controller;
 
 import com.packt.modern.api.CartApi;
 import com.packt.modern.api.model.Cart;
