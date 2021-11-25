@@ -32,6 +32,9 @@ swaggerSources {
     }
 }
 
+compileJava.dependsOn swaggerSources.eStore.code
+
+
 
 repositories {
     mavenCentral()
