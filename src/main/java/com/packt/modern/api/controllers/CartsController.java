@@ -12,6 +12,8 @@ import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 
+import static org.springframework.http.ResponseEntity.ok;
+
 @RestController
 public class CartsController implements CartApi {
     private static final Logger log = LoggerFactory.getLogger(CartsController.class);
