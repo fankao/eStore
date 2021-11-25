@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.6.0'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'org.hidetake.swagger.generator' version '2.18.2'
 }
 
 group = 'com.packt.modern'
@@ -13,6 +14,15 @@ repositories {
 }
 
 dependencies {
+    //Open API setup
+    swaggerCodegen 'org.openapitools:openapi-generator-cli:4.3.1'
+    compileOnly 'io.swagger:swagger-annotations:1.6.2'
+    compileOnly 'org.springframework.boot:spring-boot-startervalidation'
+    compileOnly 'org.openapitools:jackson-databind-nullable:0.2.1'
+    implementation 'com.fasterxml.jackson.dataformat:jacksondataformat-xml'
+    implementation 'org.springframework.boot:spring-boot-starterhateoas'
+    //-----------------------
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
