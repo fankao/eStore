@@ -1,6 +1,5 @@
 package com.packt.modern.api.repository;
 
-import static java.util.stream.Collectors.toList;
 
 import com.packt.modern.api.entity.CartEntity;
 import com.packt.modern.api.entity.ItemEntity;
@@ -8,8 +7,13 @@ import com.packt.modern.api.entity.OrderEntity;
 import com.packt.modern.api.entity.OrderItemEntity;
 import com.packt.modern.api.exception.ResourceNotFoundException;
 import com.packt.modern.api.model.NewOrder;
-import com.packt.modern.api.model.Order.StatusEnum;
+import com.packt.modern.api.model.Order;
 import com.packt.modern.api.service.ItemService;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -20,10 +24,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.StreamSupport;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
-import org.springframework.stereotype.Repository;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author : github.com/sharmasourabh
@@ -76,7 +78,7 @@ public class OrderRepositoryImpl implements OrderRepositoryExt {
         .setParameter(3, m.getCustomerId())
         .setParameter(4, orderDate)
         .setParameter(5, total)
-        .setParameter(6, StatusEnum.CREATED.getValue())
+        .setParameter(6, Order.StatusEnum.CREATED.getValue())
         .executeUpdate();
     Optional<CartEntity> oCart = cRepo.findByCustomerId(UUID.fromString(m.getCustomerId()));
     CartEntity cart = oCart.orElseThrow(() -> new ResourceNotFoundException(String.format("Cart not found for given customer (ID: %s)", m.getCustomerId())));
